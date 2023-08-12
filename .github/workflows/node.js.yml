@@ -49,4 +49,28 @@ jobs:
       with:
         service-id: ${{ secrets.SERVICE }}
         api-key: ${{ secrets.APIKEY }}
+
+
+  test:
+
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    
+    - uses: actions/checkout@v
+    - name: testing
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install
+    - run: npx playwright install
+    - run: npm run test:ui
+    - run: echo "Miroslav1996"
         
