@@ -19,6 +19,8 @@ jobs:
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
+        
+
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -29,3 +31,22 @@ jobs:
     - run: npm install
     - run: npm run test:unit
     - run: eco "Miroslav1996"
+
+  deploy:
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    
+    - name: Deploy Stage
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        service-id: ${{ secrets.SERVICE }}
+        api-key: ${{ secrets.APIKEY }}
+        
