@@ -30,7 +30,7 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run test:unit
-    - run: eco "Miroslav1996"
+    - run: echo "Miroslav1996"
 
   deploy:
 
