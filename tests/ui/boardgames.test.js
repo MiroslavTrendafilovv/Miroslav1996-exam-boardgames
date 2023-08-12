@@ -5,4 +5,6 @@ test('Check boardgames page', async ({ page }) => {
     const list = await page.$('ul');
     expect(received).toBeTruthy();
   });
+
+
   
